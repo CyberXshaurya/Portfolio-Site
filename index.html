@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#030611">
+  <meta name="description" content="A cinematic space-journey portfolio for AI/ML systems and full-stack engineering.">
+  <meta property="og:title" content="Shaurya Tiwari — Engineering Beyond the Demo">
+  <meta property="og:description" content="Travel through production AI systems, full-stack products, and applied ML research.">
+  <meta property="og:type" content="website">
+  <title>Shaurya Tiwari — Space Journey Portfolio</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/styles.css">
+  <script type="module" src="./assets/app.js"></script>
+</head>
+<body class="is-preflight">
+  <div class="preflight" id="preflight" aria-hidden="true">
+    <div class="preflight__noise"></div>
+    <div class="preflight__core">
+      <div class="preflight__radar" aria-hidden="true">
+        <i></i><i></i><i></i><span>ST</span>
+      </div>
+      <p class="preflight__eyebrow">MISSION // PORTFOLIO</p>
+      <h1>Preparing launch sequence</h1>
+      <div class="preflight__status"><span id="preflight-message">Calibrating star map</span><b id="preflight-percent">00%</b></div>
+      <div class="preflight__track"><i id="preflight-fill"></i></div>
+    </div>
+    <p class="preflight__foot">No template. No stock journey. Built as a navigable experience.</p>
+  </div>
+
+  <canvas id="cosmos" class="cosmos" aria-hidden="true"></canvas>
+  <div class="cosmos-vignette" aria-hidden="true"></div>
+  <div class="cosmos-grain" aria-hidden="true"></div>
+
+  <div class="spacecraft" id="spacecraft" aria-hidden="true">
+    <div class="spacecraft__halo"></div>
+    <svg viewBox="0 0 92 142" role="img">
+      <defs>
+        <linearGradient id="shipBody" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#f7fbff"/>
+          <stop offset="0.56" stop-color="#8da5ff"/>
+          <stop offset="1" stop-color="#23335f"/>
+        </linearGradient>
+        <linearGradient id="shipGlass" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#b7f5ff"/>
+          <stop offset="1" stop-color="#3862ff"/>
+        </linearGradient>
+      </defs>
+      <path d="M46 3c18 17 28 42 28 69v20L61 81H31L18 92V72C18 45 28 20 46 3Z" fill="url(#shipBody)" stroke="#cbd7ff" stroke-width="1.6"/>
+      <path d="M31 80 11 110l24-9 11-21Z" fill="#263767" stroke="#8da5ff" stroke-width="1.4"/>
+      <path d="m61 80 20 30-24-9-11-21Z" fill="#263767" stroke="#8da5ff" stroke-width="1.4"/>
+      <ellipse cx="46" cy="49" rx="14" ry="18" fill="url(#shipGlass)" stroke="#d8fbff" stroke-width="1.5"/>
+      <path d="M37 90h18l-4 17H41l-4-17Z" fill="#0d1530" stroke="#6176c8" stroke-width="1.3"/>
+      <circle cx="46" cy="49" r="4" fill="#d9fbff" opacity=".9"/>
+    </svg>
+    <div class="spacecraft__flame"><i></i><b></b></div>
+  </div>
+
+  <header class="mission-bar" id="mission-bar">
+    <a class="mission-brand magnetic" href="#launch" aria-label="Return to launch">
+      <span>ST</span><small>MISSION / 26</small>
+    </a>
+    <nav class="mission-nav" aria-label="Primary navigation">
+      <a href="#missions">Missions</a>
+      <a href="#lab">Lab</a>
+      <a href="#flight-log">Flight log</a>
+      <a href="#transmission">Contact</a>
+    </nav>
+    <div class="mission-actions">
+      <button class="autopilot magnetic" id="autopilot" type="button" aria-pressed="false">
+        <span class="autopilot__dot"></span><b>AUTO PILOT</b><small>OFF</small>
+      </button>
+      <a class="resume-link magnetic" data-profile-link="resume" target="_blank" rel="noreferrer">CV <span>↗</span></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation"><i></i><i></i></button>
+    </div>
+  </header>
+
+  <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu__backdrop" data-menu-close></div>
+    <div class="mobile-menu__panel">
+      <div class="mobile-menu__top"><span>ST // MISSION</span><button type="button" data-menu-close aria-label="Close navigation">×</button></div>
+      <nav>
+        <a href="#launch" data-menu-close><small>00</small>Launch</a>
+        <a href="#missions" data-menu-close><small>01</small>Missions</a>
+        <a href="#lab" data-menu-close><small>07</small>Orbital lab</a>
+        <a href="#flight-log" data-menu-close><small>08</small>Flight log</a>
+        <a href="#transmission" data-menu-close><small>09</small>Transmission</a>
+      </nav>
+      <div class="mobile-menu__links">
+        <a data-profile-link="github" target="_blank" rel="noreferrer">GitHub ↗</a>
+        <a data-profile-link="linkedin" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+        <a data-profile-link="email">Email ↗</a>
+      </div>
+    </div>
+  </aside>
+
+  <nav class="route-map" id="route-map" aria-label="Mission route"></nav>
+
+  <div class="mission-hud" id="mission-hud" aria-hidden="true">
+    <div><span>SECTOR</span><b id="hud-sector">EARTH / 00</b></div>
+    <div><span>VELOCITY</span><b id="hud-velocity">000 KM/S</b></div>
+    <div><span>MISSION</span><b id="hud-title">LAUNCH</b></div>
+  </div>
+
+  <main>
+    <section class="chapter launch" id="launch" data-route="Launch" data-sector="EARTH / 00" data-scene="launch">
+      <div class="launch__aurora" aria-hidden="true"></div>
+      <div class="earth" aria-hidden="true"><i></i><b></b></div>
+      <div class="launch__content">
+        <p class="signal-pill reveal"><i></i><span id="profile-status"></span></p>
+        <p class="chapter-code reveal">SHAURYA TIWARI // FLIGHT ST-26</p>
+        <h1 class="launch-title" aria-label="Engineering beyond the demo">
+          <span><em>ENGINEERING</em></span>
+          <span><em>BEYOND</em></span>
+          <span class="launch-title__accent"><em>THE DEMO.</em></span>
+        </h1>
+        <div class="launch__lower reveal">
+          <p id="profile-intro"></p>
+          <div class="launch__actions">
+            <a class="action action--primary magnetic" href="#mission-signalboard">Begin journey <span>↓</span></a>
+            <button class="action action--ghost magnetic" id="launch-autopilot" type="button">Watch cinematic mode <span>▶</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="launch__telemetry reveal" id="launch-proof"></div>
+      <div class="scroll-orbit" aria-hidden="true"><span>SCROLL TO LAUNCH</span><i></i></div>
+    </section>
+
+    <section class="mission-intro chapter" id="missions" data-route="Missions" data-sector="DEEP SPACE / 01" data-scene="intro">
+      <div class="mission-intro__copy reveal">
+        <p class="chapter-code">SELECTED MISSIONS // PROOF OF WORK</p>
+        <h2>Six systems.<br><span>One flight path.</span></h2>
+        <p>Each destination is a real engineering problem: product feedback, hiring intelligence, document retrieval, computer vision, procurement automation, and scientific segmentation.</p>
+      </div>
+      <div class="mission-intro__rings" aria-hidden="true"><i></i><i></i><i></i><b>06</b></div>
+    </section>
+
+    <div id="project-missions"></div>
+
+    <section class="chapter orbital-lab" id="lab" data-route="Orbital lab" data-sector="ORBITAL LAB / 07" data-scene="lab">
+      <div class="lab-orbit" aria-hidden="true"><i></i><i></i><i></i><span>ST</span></div>
+      <div class="lab-panel reveal">
+        <p class="chapter-code">ORBITAL LAB // ABOUT</p>
+        <h2>Research discipline.<br><span>Product instincts.</span></h2>
+        <p>I move from ambiguous requirements to deployed systems without treating reliability as an afterthought. The strongest work combines model intelligence with deterministic boundaries: validation, evidence, state, tests, and human control.</p>
+        <div class="lab-contact">
+          <a data-profile-link="email"><small>EMAIL CHANNEL</small><b id="profile-email"></b><span>↗</span></a>
+          <a data-profile-link="phone"><small>VOICE CHANNEL</small><b id="profile-phone"></b><span>↗</span></a>
+        </div>
+      </div>
+      <div class="capability-modules" id="capabilities"></div>
+    </section>
+
+    <section class="chapter payload" id="payload" data-route="Payload" data-sector="CARGO BAY / 08" data-scene="payload">
+      <div class="payload__head reveal">
+        <p class="chapter-code">PAYLOAD MANIFEST // TOOLBOX</p>
+        <h2>The stack is not the story.<br><span>The shipped system is.</span></h2>
+      </div>
+      <div class="payload-rings" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="payload-grid" id="stack-table"></div>
+    </section>
+
+    <section class="chapter flight-log" id="flight-log" data-route="Flight log" data-sector="ARCHIVE / 09" data-scene="log">
+      <div class="flight-log__sticky reveal">
+        <p class="chapter-code">FLIGHT LOG // ORIGIN STORY</p>
+        <h2>From earth systems<br><span>to software systems.</span></h2>
+        <p>Geology trained the eye for evidence. Space science expanded the scale. Engineering became the way to turn both into useful, testable products.</p>
+        <a class="text-link magnetic" data-profile-link="resume" target="_blank" rel="noreferrer">Open complete CV <span>↗</span></a>
+      </div>
+      <div class="flight-log__entries" id="timeline"></div>
+    </section>
+
+    <section class="chapter transmission" id="transmission" data-route="Transmission" data-sector="HOME SIGNAL / 10" data-scene="contact">
+      <div class="transmission__waves" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+      <div class="transmission__copy reveal">
+        <p class="chapter-code">FINAL TRANSMISSION // CHANNEL OPEN</p>
+        <h2>Have a difficult<br><span>system to build?</span></h2>
+        <p id="profile-availability"></p>
+      </div>
+      <div class="transmission-console reveal">
+        <div class="transmission-console__top"><span>DIRECT CHANNELS</span><i>ONLINE</i></div>
+        <a data-profile-link="email"><small>01 / EMAIL</small><b id="contact-email"></b><span>↗</span></a>
+        <a data-profile-link="linkedin" target="_blank" rel="noreferrer"><small>02 / NETWORK</small><b>LinkedIn</b><span>↗</span></a>
+        <a data-profile-link="github" target="_blank" rel="noreferrer"><small>03 / CODE</small><b>GitHub</b><span>↗</span></a>
+        <a data-profile-link="phone"><small>04 / VOICE</small><b id="contact-phone"></b><span>↗</span></a>
+      </div>
+      <footer class="site-footer">
+        <span>© 2026 // SHAURYA TIWARI</span>
+        <span>BUILT FOR THE LONG SCROLL</span>
+        <a href="#launch">RETURN TO EARTH ↑</a>
+      </footer>
+    </section>
+  </main>
+
+  <div class="mission-modal" id="mission-modal" aria-hidden="true">
+    <div class="mission-modal__backdrop" data-close-modal></div>
+    <article class="mission-modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="mission-modal__close magnetic" type="button" data-close-modal aria-label="Close project details">×</button>
+      <div class="mission-modal__visual" id="modal-visual"></div>
+      <div class="mission-modal__content">
+        <p class="chapter-code" id="modal-code"></p>
+        <h2 id="modal-title"></h2>
+        <p class="mission-modal__summary" id="modal-summary"></p>
+        <div class="mission-modal__metrics" id="modal-metrics"></div>
+        <ul id="modal-details"></ul>
+        <div class="mission-modal__tags" id="modal-tags"></div>
+        <div class="mission-modal__actions" id="modal-actions"></div>
+      </div>
+    </article>
+  </div>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" id="cursor-dot" aria-hidden="true"></div>
+</body>
+</html>
